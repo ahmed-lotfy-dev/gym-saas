@@ -420,26 +420,25 @@ OR Docker Swarm (simpler)
 
 ### Email
 
-| Service      | Use                                                                                    |
-| ------------ | -------------------------------------------------------------------------------------- |
-| **SendGrid** | ✅ Good free tier, reliable not free any more need visa using resend add it to options |
-| **AWS SES**  | Cheapest at scale                                                                      |
-| **Mailgun**  | Good alternative                                                                       |
+| Service    | Use                                                   |
+| ---------- | ----------------------------------------------------- |
+| **Resend** | ✅ Modern, developer-friendly, great for React emails |
+| **AWS SES** | Cheapest at scale                                     |
+| **Postmark**| Best deliverability for transactional emails          |
 
-**📌 Recommendation: SendGrid** (free 100 emails/day)
+**📌 Recommendation: Resend**
 
 ---
 
 ### SMS/WhatsApp
 
-| Service              | Use                  |
-| -------------------- | -------------------- |
-| **Twilio**           | Global, expensive    |
-| **Infobip**          | Good MENA coverage   |
-| **CEQUENS**          | Egyptian provider 🇪🇬 |
-| **Vodafone SMS API** | Local Egypt          |
+| Service              | Use                                   |
+| -------------------- | ------------------------------------- |
+| **CEQUENS**          | ✅ Top choice for Egypt market 🇪🇬    |
+| **Twilio / Infobip** | Best for KSA/UAE/Gulf coverage 🇸🇦 🇦🇪 |
+| **Vodafone SMS API** | Local Egypt carrier direct            |
 
-**📌 Recommendation: CEQUENS or Vodafone** for Egypt market
+**📌 Recommendation: CEQUENS** (Egypt) or **Twilio** (Gulf)
 
 ---
 

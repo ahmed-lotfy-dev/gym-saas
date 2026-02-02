@@ -105,6 +105,7 @@
 - Edit member data
 - Delete member
 - Member photo
+- **Identity Document** (National ID / Iqama / Passport)
 - Search & filter
 - Subscription status (Active / Expired)
 - Subscription history
@@ -301,8 +302,9 @@ PT subscription separate from gym subscription:
 - Before/After photo uploads
 - Trainer Schedule
 - Online Bookings
-- Inventory System
-- POS System
+- **Inventory System (Supplements, Drinks, Gear)**
+- **POS System (Point of Sale)**
+- **Ramadan Mode (Dynamic Shift Scheduling)**
 - Smart Entry Gate (Turnstile)
 - NFC Card Support
 

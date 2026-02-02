@@ -56,9 +56,11 @@ A comprehensive gym management platform with:
 
 1. **Offline-capable barcode scanning** for unreliable internet
 2. **Flexible feature toggles** - gyms enable what they need
-3. **Local payment support** (cash, bank transfer, Vodafone Cash)
-4. **Simple pricing** - no per-member fees
-5. **Mobile-responsive** - works on tablet at reception
+3. **Local payment support** (Cash, InstaPay, Vodafone Cash, Mada 🇸🇦, Knet 🇰🇼)
+4. **WhatsApp-First Experience** - All notifications, renewals, and marketing via WhatsApp API
+5. **Simple pricing** - no per-member fees
+6. **Mobile-responsive** - works on tablet at reception
+7. **Bilingual Support** - Full Arabic (RTL) / English (LTR) toggle
 
 ---
 
@@ -240,13 +242,17 @@ Acceptance Criteria:
 | Subscription Management      | P0       | Medium     |
 | Barcode Attendance           | P0       | High       |
 | Payment Recording            | P0       | Medium     |
+| **WhatsApp Notifications**   | P0       | High       |
+| **VAT/Tax Engine**           | P0       | Medium     |
 | Basic Reports                | P0       | Medium     |
 | Trainer Management           | P1       | Medium     |
 | Trainer-Client System        | P1       | Medium     |
-| Notifications (SMS/WhatsApp) | P1       | High       |
+| SMS/Email Alerts             | P2       | Medium     |
 | Advanced Reports             | P2       | Medium     |
 | Class Scheduling             | P2       | High       |
 | Waitlist Management          | P2       | Medium     |
+| **Inventory/POS**            | P2       | Medium     |
+| **Ramadan Scheduling**       | P2       | Low        |
 | Referral System              | P3       | Low        |
 | Lead CRM                     | P3       | Medium     |
 
@@ -436,7 +442,9 @@ CREATE TABLE payments (
     member_id UUID REFERENCES members(id) ON DELETE SET NULL,
     subscription_id UUID REFERENCES subscriptions(id) ON DELETE SET NULL,
     amount DECIMAL(10,2) NOT NULL,
-    payment_method VARCHAR(20) CHECK (payment_method IN ('cash', 'bank_transfer', 'visa', 'instapay', 'vodafone_cash')),
+    vat_amount DECIMAL(10,2) DEFAULT 0,
+    total_amount DECIMAL(10,2) GENERATED ALWAYS AS (amount + vat_amount) STORED,
+    payment_method VARCHAR(20) CHECK (payment_method IN ('cash', 'bank_transfer', 'visa', 'instapay', 'vodafone_cash', 'mada', 'knet')),
     reference_number VARCHAR(100),
     notes TEXT,
     recorded_by UUID REFERENCES users(id),

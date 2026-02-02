@@ -251,42 +251,51 @@ Table gym_settings {
   enableTimeRestrictions boolean
 }
 
-// Relationships
+// Relationships ... (existing)
 
-Ref: branch.gymId > gym.id
-Ref: user.gymId > gym.id
-Ref: member.gymId > gym.id
-Ref: subscription_plan.gymId > gym.id
-Ref: gym_settings.gymId - gym.id
-Ref: lead.gymId > gym.id
-Ref: class_schedule.gymId > gym.id
+// New Regional Entities
+Table inventory_product {
+  id uuid [primary key]
+  gymId uuid
+  name string
+  category EnumProductCategory
+  price decimal
+  stock int
+  isActive boolean
+  createdAt timestamp
+}
 
-Ref: user.branchId > branch.id
-Ref: member.branchId > branch.id
-Ref: attendance.branchId > branch.id
+Table pos_transaction {
+  id uuid [primary key]
+  gymId uuid
+  memberId uuid
+  totalAmount decimal
+  vatAmount decimal
+  paymentMethod EnumPaymentMethod
+  recordedBy uuid
+  createdAt timestamp
+}
 
-Ref: trainer.userId - user.id
-Ref: attendance.scannedBy > user.id
-Ref: payment.recordedBy > user.id
-Ref: lead.assignedTo > user.id
-Ref: subscription_pause.approvedBy > user.id
+Table whatsapp_template {
+  id uuid [primary key]
+  gymId uuid
+  name string
+  body text
+  language string
+  status EnumTemplateStatus
+  createdAt timestamp
+}
 
-Ref: trainer_client.trainerId > trainer.id
-Ref: class_schedule.trainerId > trainer.id
+Table tax_config {
+  gymId uuid [primary key]
+  vatRate decimal
+  taxIdNumber string
+  isVatEnabled boolean
+}
 
-Ref: subscription.memberId > member.id
-Ref: attendance.memberId > member.id
-Ref: payment.memberId > member.id
-Ref: notification.memberId > member.id
-Ref: trainer_client.memberId > member.id
-Ref: class_booking.memberId > member.id
-Ref: class_waitlist.memberId > member.id
-
-Ref: subscription.planId > subscription_plan.id
-Ref: subscription_pause.subscriptionId > subscription.id
-
-Ref: trainer_session.trainerClientId > trainer_client.id
-Ref: trainer_note.trainerClientId > trainer_client.id
-
-Ref: class_booking.classScheduleId > class_schedule.id
-Ref: class_waitlist.classScheduleId > class_schedule.id
+Ref: inventory_product.gymId > gym.id
+Ref: pos_transaction.gymId > gym.id
+Ref: pos_transaction.memberId > member.id
+Ref: pos_transaction.recordedBy > user.id
+Ref: whatsapp_template.gymId > gym.id
+Ref: tax_config.gymId - gym.id
