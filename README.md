@@ -14,11 +14,11 @@ A gym management platform with web frontend and backend. Future expansion planne
 
 ## Tech Stack
 
-*To be determined*
+_To be determined_
 
 ## Getting Started
 
-*Documentation will be added once tech stack is decided.*
+_Documentation will be added once tech stack is decided._
 
 ## Roadmap
 

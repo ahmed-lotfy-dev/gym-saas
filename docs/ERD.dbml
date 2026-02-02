@@ -1,0 +1,292 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+// User provided snippet (FIXED)
+Table follows {
+  following_user_id integer
+  followed_user_id integer
+  created_at timestamp
+}
+
+Table users {
+  id integer [primary key]
+  username varchar
+  role varchar
+  created_at timestamp
+}
+
+Table posts {
+  id integer [primary key]
+  title varchar
+  body text [note: 'Content of the post']
+  user_id integer [not null]
+  status varchar
+  created_at timestamp
+}
+
+Ref: posts.user_id > users.id // many-to-one
+Ref: users.id < follows.following_user_id
+Ref: users.id < follows.followed_user_id
+
+// Gym SaaS ERD (Converted from Mermaid)
+
+Table gym {
+  id uuid [primary key]
+  name string
+  address text
+  phone string
+  email string
+  logoUrl string
+  currency string
+  timezone string
+  isActive boolean
+  createdAt timestamp
+}
+
+Table branch {
+  id uuid [primary key]
+  gymId uuid
+  name string
+  address text
+  phone string
+  isActive boolean
+}
+
+Table user {
+  id uuid [primary key]
+  gymId uuid
+  branchId uuid
+  email string
+  passwordHash string
+  fullName string
+  phone string
+  role EnumRole
+  isActive boolean
+  lastLogin timestamp
+  createdAt timestamp
+}
+
+Table trainer {
+  id uuid [primary key]
+  userId uuid
+  gymId uuid
+  specialty string
+  bio text
+  commissionRate decimal
+  isActive boolean
+}
+
+Table member {
+  id uuid [primary key]
+  gymId uuid
+  branchId uuid
+  fullName string
+  phone string
+  email string
+  barcode string
+  photoUrl string
+  idNumber string
+  dateOfBirth date
+  gender EnumGender
+  isActive boolean
+  createdAt timestamp
+}
+
+Table subscription_plan {
+  id uuid [primary key]
+  gymId uuid
+  name string
+  durationDays int
+  price decimal
+  description text
+  isActive boolean
+}
+
+Table subscription {
+  id uuid [primary key]
+  gymId uuid
+  memberId uuid
+  planId uuid
+  startDate date
+  endDate date
+  status EnumSubscriptionStatus
+  pricePaid decimal
+  isRenewal boolean
+  createdAt timestamp
+}
+
+Table subscription_pause {
+  id uuid [primary key]
+  subscriptionId uuid
+  startDate date
+  endDate date
+  reason string
+  approvedBy uuid
+}
+
+Table trainer_client {
+  id uuid [primary key]
+  trainerId uuid
+  memberId uuid
+  totalSessions int
+  remainingSessions int
+  startDate date
+  endDate date
+  isActive boolean
+}
+
+Table trainer_session {
+  id uuid [primary key]
+  trainerClientId uuid
+  sessionDate date
+  notes text
+  createdAt timestamp
+}
+
+Table trainer_note {
+  id uuid [primary key]
+  trainerClientId uuid
+  note string
+  createdAt timestamp
+}
+
+Table attendance {
+  id uuid [primary key]
+  gymId uuid
+  branchId uuid
+  memberId uuid
+  scannedBy uuid
+  checkIn timestamp
+  checkOut timestamp
+  deviceId string
+  createdAt timestamp
+}
+
+Table payment {
+  id uuid [primary key]
+  gymId uuid
+  memberId uuid
+  subscriptionId uuid
+  recordedBy uuid
+  amount decimal
+  paymentMethod EnumPaymentMethod
+  referenceNumber string
+  notes text
+  createdAt timestamp
+}
+
+Table notification {
+  id uuid [primary key]
+  gymId uuid
+  memberId uuid
+  type EnumNotificationType
+  message string
+  isRead boolean
+  sentAt timestamp
+}
+
+Table lead {
+  id uuid [primary key]
+  gymId uuid
+  assignedTo uuid
+  name string
+  phone string
+  email string
+  source EnumLeadSource
+  status EnumLeadStatus
+  followUpDate timestamp
+  notes text
+  convertedToMemberId uuid
+}
+
+Table class_schedule {
+  id uuid [primary key]
+  gymId uuid
+  branchId uuid
+  trainerId uuid
+  name string
+  dayOfWeek EnumDayOfWeek
+  startTime time
+  duration int
+  maxCapacity int
+  price decimal
+}
+
+Table class_booking {
+  id uuid [primary key]
+  classScheduleId uuid
+  memberId uuid
+  bookingDate date
+  status EnumBookingStatus
+}
+
+Table class_waitlist {
+  id uuid [primary key]
+  classScheduleId uuid
+  memberId uuid
+  joinDate timestamp
+  priority int
+  notifiedAt timestamp
+  status EnumWaitlistStatus
+}
+
+Table gym_settings {
+  gymId uuid [primary key]
+  alertDaysBeforeExpiry int
+  receiptFooter text
+  enableOnlineRegistration boolean
+  enableMembershipFreeze boolean
+  enableOnlineFreezeRequest boolean
+  enableSelfCancellation boolean
+  enableReferralSystem boolean
+  enableGuestPasses boolean
+  enableClassBooking boolean
+  enableOnlinePayments boolean
+  enableAutoRenewal boolean
+  enableTrainerCommission boolean
+  enableBirthdayRewards boolean
+  enableWaitlist boolean
+  enableCheckOut boolean
+  enableVisitLimits boolean
+  enableTimeRestrictions boolean
+}
+
+// Relationships
+
+Ref: branch.gymId > gym.id
+Ref: user.gymId > gym.id
+Ref: member.gymId > gym.id
+Ref: subscription_plan.gymId > gym.id
+Ref: gym_settings.gymId - gym.id
+Ref: lead.gymId > gym.id
+Ref: class_schedule.gymId > gym.id
+
+Ref: user.branchId > branch.id
+Ref: member.branchId > branch.id
+Ref: attendance.branchId > branch.id
+
+Ref: trainer.userId - user.id
+Ref: attendance.scannedBy > user.id
+Ref: payment.recordedBy > user.id
+Ref: lead.assignedTo > user.id
+Ref: subscription_pause.approvedBy > user.id
+
+Ref: trainer_client.trainerId > trainer.id
+Ref: class_schedule.trainerId > trainer.id
+
+Ref: subscription.memberId > member.id
+Ref: attendance.memberId > member.id
+Ref: payment.memberId > member.id
+Ref: notification.memberId > member.id
+Ref: trainer_client.memberId > member.id
+Ref: class_booking.memberId > member.id
+Ref: class_waitlist.memberId > member.id
+
+Ref: subscription.planId > subscription_plan.id
+Ref: subscription_pause.subscriptionId > subscription.id
+
+Ref: trainer_session.trainerClientId > trainer_client.id
+Ref: trainer_note.trainerClientId > trainer_client.id
+
+Ref: class_booking.classScheduleId > class_schedule.id
+Ref: class_waitlist.classScheduleId > class_schedule.id
