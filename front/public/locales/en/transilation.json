@@ -1,0 +1,341 @@
+{
+  "app": {
+    "name": "GymPulse Cloud",
+    "tagline": "Multi-gym, multi-branch SaaS platform"
+  },
+  "language": {
+    "switchToEnglish": "English",
+    "switchToArabic": "العربيه"
+  },
+  "labels": {
+    "navigation": "Navigation",
+    "saasBadge": "Multi-gym SaaS",
+    "multiBranch": "Multi-branch",
+    "multiUser": "Multi-user",
+    "gym": "Gym",
+    "branch": "Branch",
+    "user": "You: Gym admin"
+  },
+  "common": {
+    "searchPlaceholder": "Search members, invoices, sessions..."
+  },
+  "actions": {
+    "export": "Quick export",
+    "newMember": "New member",
+    "startScan": "Start scanning",
+    "addPlan": "Add plan",
+    "sendAlerts": "Send alerts",
+    "updateSettings": "Save settings"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard",
+      "intro": "Operational overview for every gym and branch today."
+    },
+    "members": {
+      "title": "Members",
+      "intro": "Manage members, search, and auto-generate barcodes."
+    },
+    "subscriptions": {
+      "title": "Subscriptions",
+      "intro": "Plan types, member links, and discounts."
+    },
+    "attendance": {
+      "title": "Barcode Attendance",
+      "intro": "Barcode check-ins and auto-block expired passes."
+    },
+    "payments": {
+      "title": "Payments & Invoices",
+      "intro": "Invoices, multi-method payments, and clean financial logs."
+    },
+    "alerts": {
+      "title": "Alerts",
+      "intro": "Subscription and session alerts across channels."
+    },
+    "reports": {
+      "title": "Reports",
+      "intro": "Exportable financial and operational reporting."
+    },
+    "settings": {
+      "title": "Settings",
+      "intro": "Languages, permissions, and gym configuration."
+    },
+    "trainer": {
+      "title": "Trainer System",
+      "intro": "Trainer dashboard with clients and sessions."
+    }
+  },
+  "tables": {
+    "expiring": "Expiring subscriptions",
+    "expiringDescription": "Renew before expiration.",
+    "checkins": "Latest check-ins",
+    "checkinsDescription": "Today attendance log.",
+    "members": "Members list",
+    "invoices": "Latest invoices",
+    "permissions": "Permissions matrix",
+    "sessions": "Trainer session log"
+  },
+  "time": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "days": "{{count}} days",
+    "daysAgo": "{{count}} days ago"
+  },
+  "plan": {
+    "activeTitle": "Active plan",
+    "monthlyTitle": "Monthly subscription for gyms",
+    "supportsBranches": "Supports up to {{count}} branches",
+    "manage": "Manage plan"
+  },
+  "dashboard": {
+    "stats": {
+      "totalMembers": "Total members",
+      "totalMembersChange": "+8% this month",
+      "todayAttendance": "Today attendance",
+      "todayAttendanceChange": "+14% today",
+      "expiringSoon": "Expiring soon",
+      "expiringSoonChange": "within 7 days",
+      "monthlyRevenue": "Monthly revenue",
+      "monthlyRevenueChange": "+6% MoM",
+      "activeTrainers": "Active trainers",
+      "activeTrainersChange": "+3 this week",
+      "ptClients": "PT clients",
+      "ptClientsChange": "+11 sessions today"
+    },
+    "branchPerformance": {
+      "title": "Branch performance",
+      "description": "Real-time comparison across gyms and branches.",
+      "gyms": "Gyms",
+      "gymsNote": "Scalable",
+      "branches": "Branches",
+      "branchesNote": "Unified ops",
+      "users": "Users",
+      "usersNote": "Admins + staff",
+      "monthlyRevenue": "Monthly revenue",
+      "includesAllActiveBranches": "Includes all active branches."
+    },
+    "quickAlerts": {
+      "title": "Quick alerts",
+      "description": "Events that need attention.",
+      "badge": "Alert",
+      "monthlyExpiring": {
+        "title": "Monthly plans expiring",
+        "description": "18 members within 72 hours"
+      },
+      "ptRemaining": {
+        "title": "PT sessions remaining",
+        "description": "5 clients below 3 sessions"
+      },
+      "branchPeak": {
+        "title": "Nasr City branch",
+        "description": "High peak usage"
+      }
+    }
+  },
+  "members": {
+    "description": "Quick search and member management.",
+    "filters": {
+      "active": "Active",
+      "all": "All",
+      "expiring": "Expiring",
+      "expired": "Expired"
+    },
+    "status": {
+      "active": "Active",
+      "expired": "Expired"
+    },
+    "table": {
+      "member": "Member",
+      "plan": "Plan",
+      "status": "Status",
+      "lastVisit": "Last visit"
+    }
+  },
+  "plans": {
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "quarterly": "Quarterly",
+    "yearly": "Yearly",
+    "special": "Special offer",
+    "dailyDuration": "1-day access",
+    "weeklyDuration": "7 days",
+    "monthlyDuration": "30 days",
+    "quarterlyDuration": "90 days",
+    "yearlyDuration": "365 days",
+    "specialDuration": "6 months",
+    "perks": {
+      "fullDayAccess": "Full-day access",
+      "instantQr": "Instant QR",
+      "autoRenew": "Auto-renew",
+      "classDiscounts": "Class discounts",
+      "expiryAlerts": "Expiry alerts",
+      "attendanceTracking": "Attendance tracking",
+      "discount10": "10% discount",
+      "assessmentSession": "Assessment session",
+      "discount20": "20% discount",
+      "priorityBooking": "Priority booking",
+      "freePtSession": "Free PT session",
+      "retailVouchers": "Retail vouchers"
+    }
+  },
+  "subscriptions": {
+    "description": "Manage subscription types and pricing."
+  },
+  "attendance": {
+    "description": "QR/Barcode scan with auto-blocking.",
+    "readyToScan": "Ready to scan",
+    "scanSource": "Camera or barcode device",
+    "memberInfo": "Member info",
+    "remainingDays": "{{count}} days remaining",
+    "todayLog": "Today log",
+    "status": {
+      "checkedIn": "Checked in",
+      "checkedOut": "Checked out",
+      "blocked": "Blocked"
+    },
+    "entryRules": {
+      "title": "Entry rules",
+      "description": "Applied automatically.",
+      "blockExpired": "Block entry if subscription expired",
+      "preventDuplicate": "Prevent duplicate check-ins",
+      "autoCheckout": "Auto check-out"
+    }
+  },
+  "payments": {
+    "description": "Invoices archive and payments.",
+    "methods": {
+      "cash": "Cash",
+      "transfer": "Transfer",
+      "visa": "Visa"
+    },
+    "summary": {
+      "todayPayments": {
+        "title": "Today payments",
+        "note": "+12% vs yesterday"
+      },
+      "pendingInvoices": {
+        "title": "Pending invoices",
+        "note": "Need follow-up"
+      },
+      "averageTicket": {
+        "title": "Average ticket",
+        "note": "Last 30 days"
+      }
+    },
+    "table": {
+      "id": "ID",
+      "member": "Member",
+      "amount": "Amount",
+      "method": "Method"
+    }
+  },
+  "alerts": {
+    "description": "Subscription and session alerts.",
+    "ready": "Ready",
+    "channels": {
+      "smsNote": "Delivery rate",
+      "whatsappNote": "Open rate",
+      "emailNote": "Response rate"
+    }
+  },
+  "reports": {
+    "export": "Export PDF / Excel",
+    "items": {
+      "attendance": {
+        "title": "Attendance report",
+        "description": "Daily & monthly per branch"
+      },
+      "subscriptions": {
+        "title": "Subscription report",
+        "description": "Expirations & renewals"
+      },
+      "revenue": {
+        "title": "Revenue report",
+        "description": "By branch and staff"
+      },
+      "trainers": {
+        "title": "Trainer report",
+        "description": "PT sessions & clients"
+      }
+    },
+    "summary": {
+      "title": "Performance summary",
+      "description": "Revenue and subscription summary.",
+      "renewalRate": {
+        "title": "Renewal rate",
+        "note": "Last 30 days"
+      },
+      "avgAttendance": {
+        "title": "Avg attendance",
+        "note": "per day"
+      },
+      "ptSessions": {
+        "title": "PT sessions",
+        "note": "monthly"
+      }
+    }
+  },
+  "settings": {
+    "gymProfile": {
+      "title": "Gym profile",
+      "subtitle": "Logo, address, currency"
+    },
+    "barcode": {
+      "title": "Barcode settings",
+      "subtitle": "Duplicate window: 30 mins"
+    },
+    "permissionsDescription": "Role-based permissions."
+  },
+  "permissions": {
+    "table": {
+      "action": "Action",
+      "gymAdmin": "Gym admin",
+      "staff": "Staff",
+      "trainer": "Trainer"
+    },
+    "actions": {
+      "addMember": "Add member",
+      "viewAllMembers": "View all members",
+      "barcodeAttendance": "Barcode attendance",
+      "seeOwnClients": "See own clients",
+      "logTrainingSession": "Log training session",
+      "financialReports": "Financial reports",
+      "addNotes": "Add notes"
+    }
+  },
+  "trainer": {
+    "summary": {
+      "myClients": {
+        "title": "My clients",
+        "note": "active"
+      },
+      "remainingSessions": {
+        "title": "Remaining sessions",
+        "note": "this week"
+      },
+      "ptPlans": {
+        "title": "PT plans",
+        "note": "renewable"
+      }
+    },
+    "myClients": {
+      "title": "My clients",
+      "description": "Trainer sees only assigned clients."
+    },
+    "sessions": {
+      "description": "Log sessions and notes."
+    },
+    "sessionsCount": "{{count}} sessions",
+    "goals": {
+      "cutting": "Cutting",
+      "bulking": "Bulking",
+      "fitness": "Fitness"
+    },
+    "sessionLog": {
+      "resistanceLogged": "Resistance session logged",
+      "weightUpdated": "Weight updated +2kg",
+      "sessionCanceled": "Session canceled"
+    }
+  }
+}

@@ -1,0 +1,341 @@
+{
+  "app": {
+    "name": "GymPulse Cloud",
+    "tagline": "جيم, فروع متعددة، منصة SaaS متعددة"
+  },
+  "language": {
+    "switchToEnglish": "English",
+    "switchToArabic": "العربية"
+  },
+  "labels": {
+    "navigation": "التنقل",
+    "saasBadge": "SaaS متعددة الجيمات",
+    "multiBranch": "عدد الفروع",
+    "multiUser": "عدد المستخدمين",
+    "gym": "الجيم",
+    "branch": "الفرع",
+    "user": "أنت: أدمين الجيم"
+  },
+  "common": {
+    "searchPlaceholder": "ابحث عن عضو، فاتورة، جلسة..."
+  },
+  "actions": {
+    "export": "تصدير سريعة",
+    "newMember": "إضافة عضو جديد",
+    "startScan": "بدء المسح",
+    "addPlan": "إضافة باقة",
+    "sendAlerts": "إرسال التنبيهات",
+    "updateSettings": "تحديث الإعدادات"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "لوحة التحكم",
+      "intro": "نظرة شاملة لكل الجيمات والفروع."
+    },
+    "members": {
+      "title": "الأعضاء",
+      "intro": "إضافة الأعضاء وتعديل بياناتهم وتحليل سلوكهم."
+    },
+    "subscriptions": {
+      "title": "الاشتراكات",
+      "intro": "أنواع الاشتراكات وربطها بالأعضاء والخصومات."
+    },
+    "attendance": {
+      "title": "الحضور بالباركود",
+      "intro": "تسجيل الحضور بالباركود وتحليل حضور الأعضاء."
+    },
+    "payments": {
+      "title": "المدفوعات والفواتير",
+      "intro": "فواتير، طرق دفع متعددة، وأرشفة المدفوعات."
+    },
+    "alerts": {
+      "title": "التنبيهات",
+      "intro": "تنبيهات الاشتراك والجلسات الخاصة بالعملاء."
+    },
+    "reports": {
+      "title": "التقارير",
+      "intro": "تقارير مالية وتشفيلية قابلة للتصدير."
+    },
+    "settings": {
+      "title": "الإعدادات",
+      "intro": "اللغة، الصلاحيات، وإعدادات الجيم والفروع."
+    },
+    "trainer": {
+      "title": "نظام المدرّبين",
+      "intro": "لوحة خاصّة للمدرّبين وإدارة العضويات والجلسات."
+    }
+  },
+  "tables": {
+    "expiring": "اشتراكات قريباً من الانتهاء",
+    "expiringDescription": "جدول الاشتراكات التي ستنتهي قريبًا.",
+    "checkins": "تسجيل الحضور",
+    "checkinsDescription": "سجل حضور الأعضاء اليوم.",
+    "members": "قائمة الأعضاء",
+    "invoices": "الفواتير",
+    "permissions": "صلاحيات المستخدمين",
+    "sessions": "جلسات التدريب الخاصة"
+  },
+  "time": {
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "days": "{{count}} يوم",
+    "daysAgo": "منذ {{count}} أيام"
+  },
+  "plan": {
+    "activeTitle": "الباقة النشطة",
+    "monthlyTitle": "اشتراك شهري للجيمات",
+    "supportsBranches": "يدعم حتى {{count}} فرع",
+    "manage": "إدارة الباقة"
+  },
+  "dashboard": {
+    "stats": {
+      "totalMembers": "إجمالي الأعضاء",
+      "totalMembersChange": "+8% هذا الشهر",
+      "todayAttendance": "حضور اليوم",
+      "todayAttendanceChange": "+14% اليوم",
+      "expiringSoon": "اشتراكات قريباً من الانتهاء",
+      "expiringSoonChange": "خلال 7 أيام",
+      "monthlyRevenue": "إيرادات الشهر",
+      "monthlyRevenueChange": "+6% عن الشهر الماضي",
+      "activeTrainers": "المدرّبين النشطين",
+      "activeTrainersChange": "+3 هذا الأسبوع",
+      "ptClients": "أعضاء التدريب الخاص",
+      "ptClientsChange": "+11 جلسة اليوم"
+    },
+    "branchPerformance": {
+      "title": "أداء الفروع",
+      "description": "مقارنة فورية بين الفروع والجيمات.",
+      "gyms": "عدد الجيمات",
+      "gymsNote": "قابل للتوسع",
+      "branches": "عدد الفروع",
+      "branchesNote": "تشفيل موحد",
+      "users": "المستخدمو الجيم",
+      "usersNote": "مدير + موظفون",
+      "monthlyRevenue": "إيرادات الشهر",
+      "includesAllActiveBranches": "البيانيات تشمل كل الفروع النشطة."
+    },
+    "quickAlerts": {
+      "title": "تنبيهات سريعة",
+      "description": "أهم التنبيهات التي تحتاج إلى اهتمام فوري.",
+      "badge": "تنبيه",
+      "monthlyExpiring": {
+        "title": "انتهاء اشتراكات شهرية",
+        "description": "18 عضو خلال 72 ساعة"
+      },
+      "ptRemaining": {
+        "title": "جلسات تدريب خاصة متبقية",
+        "description": "5 عضو أقل من 3 جلسات"
+      },
+      "branchPeak": {
+        "title": "فرع مُدَّين نصراً",
+        "description": "ازدهار عالي ووقت الذهاب"
+      }
+    }
+  },
+  "members": {
+    "description": "بحث سريعة وإدارة بيانات الأعضاء.",
+    "filters": {
+      "active": "نشطة",
+      "all": "الكل",
+      "expiring": "قريبة من الانتهاء",
+      "expired": "منتهية"
+    },
+    "status": {
+      "active": "نشطة",
+      "expired": "منتهية"
+    },
+    "table": {
+      "member": "العضو",
+      "plan": "الاشتراك",
+      "status": "الحالة",
+      "lastVisit": "آخر زيارة"
+    }
+  },
+  "plans": {
+    "daily": "يومية",
+    "weekly": "أسبوعية",
+    "monthly": "شهرية",
+    "quarterly": "ربع سنوية",
+    "yearly": "سنوية",
+    "special": "عُرض خاص",
+    "dailyDuration": "صباحية يوم واحدة",
+    "weeklyDuration": "7 أيام",
+    "monthlyDuration": "30 يوم",
+    "quarterlyDuration": "90 يوم",
+    "yearlyDuration": "365 يوم",
+    "specialDuration": "6 شهور",
+    "perks": {
+      "fullDayAccess": "دخول مفتوح للليوم",
+      "instantQr": "QR فوري",
+      "autoRenew": "تجديد تلقائي",
+      "classDiscounts": "خصومات للكورسات",
+      "expiryAlerts": "تنبيهات انتهاء الاشتراك",
+      "attendanceTracking": "تتبع الحضور",
+      "discount10": "خصم 10%",
+      "assessmentSession": "هديية جلسة تقييم",
+      "discount20": "خصم 20%",
+      "priorityBooking": "أولوية الحجز",
+      "freePtSession": "حصة PT مجانية",
+      "retailVouchers": "قسائم متجر"
+    }
+  },
+  "subscriptions": {
+    "description": "إضافة أنواع الاشتراكات والأسعار."
+  },
+  "attendance": {
+    "description": "مسح QR/Barcode مع معرفة بيانات العضو وسجل الدخول للأشتراكات النشطة.",
+    "readyToScan": "جاهز للمسح",
+    "scanSource": "كاميرا أو جهاز مسح باركود",
+    "memberInfo": "بيانات العضو",
+    "remainingDays": "{{count}} يوم متبقية",
+    "todayLog": "سجل اليوم",
+    "status": {
+      "checkedIn": "تم الدخول",
+      "checkedOut": "تم الخروج",
+      "blocked": "مرفوض"
+    },
+    "entryRules": {
+      "title": "قواعد الدخول",
+      "description": "يتم تطبيق هذه القواعد عند محاولة الدخول.",
+      "blockExpired": "منع الدخول إذا انتهت الاشتراك",
+      "preventDuplicate": "منع التكرار في نفس اليوم",
+      "autoCheckout": "الخروج التلقائي بعد انتهاء الوقت"
+    }
+  },
+  "payments": {
+    "description": "ÙÙˆØ§ØªÙŠØ±ØŒ Ø·Ø±Ù‚ Ø¯ÙØ¹ Ù…ØªØ¹Ø¯Ø¯Ø©ØŒ ÙˆØ£Ø±Ø´ÙŠÙ Ù…Ø§Ù„ÙŠ Ø¯Ù‚ÙŠÙ‚.",
+    "methods": {
+      "cash": "ÙƒØ§Ø´",
+      "transfer": "ØªØ­ÙˆÙŠÙ„",
+      "visa": "ÙÙŠØ²Ø§"
+    },
+    "summary": {
+      "todayPayments": {
+        "title": "Ù…Ø¯ÙÙˆØ¹Ø§Øª Ø§Ù„ÙŠÙˆÙ…",
+        "note": "+12% Ø¹Ù† Ø§Ù„Ø£Ù…Ø³"
+      },
+      "pendingInvoices": {
+        "title": "ÙÙˆØ§ØªÙŠØ± Ù…Ø¹Ù„Ù‚Ø©",
+        "note": "ØªØ­ØªØ§Ø¬ Ù…ØªØ§Ø¨Ø¹Ø©"
+      },
+      "averageTicket": {
+        "title": "Ù…ØªÙˆØ³Ø· Ø§Ù„Ø³Ù„Ø©",
+        "note": "Ø¢Ø®Ø± 30 ÙŠÙˆÙ…"
+      }
+    },
+    "table": {
+      "id": "Ø§Ù„Ø±Ù‚Ù…",
+      "member": "Ø§Ù„Ø¹Ø¶Ùˆ",
+      "amount": "Ø§Ù„Ù‚ÙŠÙ…Ø©",
+      "method": "Ø§Ù„Ø·Ø±ÙŠÙ‚Ø©"
+    }
+  },
+  "alerts": {
+    "description": "ØªÙ†Ø¨ÙŠÙ‡Ø§Øª Ø§Ù†ØªÙ‡Ø§Ø¡ Ø§Ù„Ø§Ø´ØªØ±Ø§Ùƒ ÙˆØ§Ù„Ø¬Ù„Ø³Ø§Øª.",
+    "ready": "Ø¬Ø§Ù‡Ø² Ù„Ù„Ø¥Ø±Ø³Ø§Ù„",
+    "channels": {
+      "smsNote": "Ù…Ø¹Ø¯Ù„ Ø§Ù„ØªØ³Ù„ÙŠÙ…",
+      "whatsappNote": "Ù…Ø¹Ø¯Ù„ Ø§Ù„ÙØªØ­",
+      "emailNote": "Ù…Ø¹Ø¯Ù„ Ø§Ù„Ø§Ø³ØªØ¬Ø§Ø¨Ø©"
+    }
+  },
+  "reports": {
+    "export": "ØªØµØ¯ÙŠØ± PDF / Excel",
+    "items": {
+      "attendance": {
+        "title": "ØªÙ‚Ø±ÙŠØ± Ø§Ù„Ø­Ø¶ÙˆØ±",
+        "description": "ÙŠÙˆÙ…ÙŠ ÙˆØ´Ù‡Ø±ÙŠ Ù„ÙƒÙ„ ÙØ±Ø¹"
+      },
+      "subscriptions": {
+        "title": "ØªÙ‚Ø±ÙŠØ± Ø§Ù„Ø§Ø´ØªØ±Ø§ÙƒØ§Øª",
+        "description": "Ø§Ù†ØªÙ‡Ø§Ø¡ ÙˆØªØ¬Ø¯ÙŠØ¯Ø§Øª"
+      },
+      "revenue": {
+        "title": "ØªÙ‚Ø±ÙŠØ± Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯Ø§Øª",
+        "description": "Ø­Ø³Ø¨ Ø§Ù„ÙØ±Ø¹ ÙˆØ§Ù„Ù…ÙˆØ¸Ù"
+      },
+      "trainers": {
+        "title": "ØªÙ‚Ø±ÙŠØ± Ø§Ù„Ù…Ø¯Ø±Ø¨ÙŠÙ†",
+        "description": "Ø¬Ù„Ø³Ø§Øª ÙˆØ¹Ù…Ù„Ø§Ø¡ PT"
+      }
+    },
+    "summary": {
+      "title": "Ù…Ù„Ø®Øµ Ø§Ù„Ø£Ø¯Ø§Ø¡",
+      "description": "Ù…Ù„Ø®Øµ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯Ø§Øª ÙˆØ§Ù„Ø§Ø´ØªØ±Ø§ÙƒØ§Øª.",
+      "renewalRate": {
+        "title": "Ù†Ø³Ø¨Ø© Ø§Ù„ØªØ¬Ø¯ÙŠØ¯",
+        "note": "Ø¢Ø®Ø± 30 ÙŠÙˆÙ…"
+      },
+      "avgAttendance": {
+        "title": "Ù…ØªÙˆØ³Ø· Ø§Ù„Ø­Ø¶ÙˆØ±",
+        "note": "ÙŠÙˆÙ…ÙŠ"
+      },
+      "ptSessions": {
+        "title": "Ø¬Ù„Ø³Ø§Øª PT",
+        "note": "Ø´Ù‡Ø±ÙŠ"
+      }
+    }
+  },
+  "settings": {
+    "gymProfile": {
+      "title": "Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ø¬ÙŠÙ…",
+      "subtitle": "Ø§Ù„Ù„ÙˆØ¬ÙˆØŒ Ø§Ù„Ø¹Ù†ÙˆØ§Ù†ØŒ Ø§Ù„Ø¹Ù…Ù„Ø©"
+    },
+    "barcode": {
+      "title": "Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø¨Ø§Ø±ÙƒÙˆØ¯",
+      "subtitle": "ÙØ§ØµÙ„ Ø²Ù…Ù†ÙŠ Ù„Ù„ØªÙƒØ±Ø§Ø±: 30 Ø¯Ù‚ÙŠÙ‚Ø©"
+    },
+    "permissionsDescription": "ØµÙ„Ø§Ø­ÙŠØ§Øª Ø­Ø³Ø¨ Ø§Ù„Ø¯ÙˆØ±."
+  },
+  "permissions": {
+    "table": {
+      "action": "Ø§Ù„ÙˆØ¸ÙŠÙØ©",
+      "gymAdmin": "Ø£Ø¯Ù…Ù† Ø§Ù„Ø¬ÙŠÙ…",
+      "staff": "Ø§Ù„Ø§Ø³ØªÙ‚Ø¨Ø§Ù„",
+      "trainer": "Ø§Ù„Ù…Ø¯Ø±Ø¨"
+    },
+    "actions": {
+      "addMember": "Ø¥Ø¶Ø§ÙØ© Ø¹Ø¶Ùˆ",
+      "viewAllMembers": "Ø±Ø¤ÙŠØ© ÙƒÙ„ Ø§Ù„Ø£Ø¹Ø¶Ø§Ø¡",
+      "barcodeAttendance": "ØªØ³Ø¬ÙŠÙ„ Ø­Ø¶ÙˆØ± Ø¨Ø§Ù„Ø¨Ø§Ø±ÙƒÙˆØ¯",
+      "seeOwnClients": "Ø±Ø¤ÙŠØ© Ø¹Ù…Ù„Ø§Ø¡Ù‡ ÙÙ‚Ø·",
+      "logTrainingSession": "ØªØ³Ø¬ÙŠÙ„ Ø¬Ù„Ø³Ø© ØªØ¯Ø±ÙŠØ¨",
+      "financialReports": "ØªÙ‚Ø§Ø±ÙŠØ± Ù…Ø§Ù„ÙŠØ©",
+      "addNotes": "Ø¥Ø¶Ø§ÙØ© Ù…Ù„Ø§Ø­Ø¸Ø§Øª"
+    }
+  },
+  "trainer": {
+    "summary": {
+      "myClients": {
+        "title": "Ø¹Ù…Ù„Ø§Ø¦ÙŠ",
+        "note": "Ù†Ø´Ø·"
+      },
+      "remainingSessions": {
+        "title": "Ø¬Ù„Ø³Ø§Øª Ù…ØªØ¨Ù‚ÙŠØ©",
+        "note": "Ù‡Ø°Ø§ Ø§Ù„Ø£Ø³Ø¨ÙˆØ¹"
+      },
+      "ptPlans": {
+        "title": "Ø§Ø´ØªØ±Ø§ÙƒØ§Øª PT",
+        "note": "Ù‚Ø§Ø¨Ù„Ø© Ù„Ù„ØªØ¬Ø¯ÙŠØ¯"
+      }
+    },
+    "myClients": {
+      "title": "Ø¹Ù…Ù„Ø§Ø¦ÙŠ",
+      "description": "ÙŠØ±Ù‰ Ø§Ù„Ù…Ø¯Ø±Ø¨ Ø¹Ù…Ù„Ø§Ø¡Ù‡ ÙÙ‚Ø·."
+    },
+    "sessions": {
+      "description": ""
+    },
+    "sessionsCount": "{{count}} جلسات",
+    "goals": {
+      "cutting": "ØªÙ†Ø´ÙŠÙ",
+      "bulking": "ØªØ¶Ø®ÙŠÙ…",
+      "fitness": "Ù„ÙŠØ§Ù‚Ø©"
+    },
+    "sessionLog": {
+      "resistanceLogged": "تم تسجيل مقاومة الجلسة",
+      "weightUpdated": "تم تحديث الوزن +2 كجم",
+      "sessionCanceled": "تم إلغاء الجلسة"
+    }
+  }
+}
