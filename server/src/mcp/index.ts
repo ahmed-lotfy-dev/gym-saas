@@ -1,19 +1,28 @@
+import { mcp } from "elysia-mcp";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { z } from "zod";
 
-const server = new McpServer({
-  name: "Base MCP",
-  version: "1.0.0",
-});
-
-server.registerTool(
-  "health",
-  {
-    description: "Returns API health status",
-    inputSchema: { type: "object", properties: {} },
+export const mcpPlugin = mcp({
+  serverInfo: {
+    name: "Base MCP",
+    version: "1.0.0",
   },
-  async () => ({
-    content: [{ type: "text", text: "ok" }],
-  })
-);
-
-export const mcpServer = server;
+  capabilities: {
+    tools: {},
+    resources: {},
+    prompts: {},
+    logging: {},
+  },
+  setupServer: async (server: McpServer) => {
+    server.registerTool(
+      "health",
+      {
+        description: "Returns API health status",
+        inputSchema: z.object({}),
+      },
+      async () => ({
+        content: [{ type: "text", text: "ok" }],
+      })
+    );
+  },
+});
