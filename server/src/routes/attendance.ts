@@ -4,6 +4,14 @@ import { attendance, members, subscriptions } from "../db/schema";
 import { eq, and, gte, desc, count, sql } from "drizzle-orm";
 import { requireStaff } from "../middleware/auth";
 
+const attendanceIdParams = t.Object({
+  attendanceId: t.String({ format: "uuid" }),
+});
+
+const gymIdParams = t.Object({
+  gymId: t.String({ format: "uuid" }),
+});
+
 export const attendanceRoutes = new Elysia({ prefix: "/api/v1/attendance", tags: ["Attendance"] })
   .post("/scan", async ({ body, user }) => {
     const member = await db.query.members.findFirst({
@@ -77,6 +85,7 @@ export const attendanceRoutes = new Elysia({ prefix: "/api/v1/attendance", tags:
       .where(eq(attendance.id, params.attendanceId))
       .returning();
   }, {
+    params: attendanceIdParams,
     detail: { summary: "Check out" },
   });
 
@@ -96,6 +105,7 @@ export const gymAttendanceRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/att
       orderBy: [desc(attendance.checkIn)],
     });
   }, {
+    params: gymIdParams,
     query: t.Object({ branchId: t.Optional(t.String()) }),
     detail: { summary: "Get today's attendance" },
   })
@@ -119,6 +129,7 @@ export const gymAttendanceRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/att
 
     return items;
   }, {
+    params: gymIdParams,
     query: t.Object({
       from: t.Optional(t.String()),
       to: t.Optional(t.String()),
