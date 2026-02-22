@@ -2,7 +2,7 @@ import { Elysia, t } from "elysia";
 import { db } from "../db";
 import { gyms, branches, users, gymSettings, taxConfig } from "../db/schema";
 import { eq, desc, count, sql, and, gte, lte } from "drizzle-orm";
-import { requireGymAccess, requireGymAdmin } from "../middleware/auth";
+import { requireGymAccess } from "../middleware/auth";
 
 // Validation layer is temporarily disabled per request.
 // const uuidParams = t.Object({
@@ -26,14 +26,14 @@ import { requireGymAccess, requireGymAdmin } from "../middleware/auth";
 //   }),
 // });
 
-const createGymBody = t.Object(
-  {
+const createGymBody = t.Partial(
+  t.Object({
     name: t.String({ minLength: 1, default: "Downtown Gym" }),
-    address: t.Optional(t.String({ default: "Cairo, Egypt" })),
-    phone: t.Optional(t.String({ default: "+201001112223" })),
-    email: t.Optional(t.String({ default: "admin@downtowngym.com" })),
-    currency: t.Optional(t.String({ default: "EGP" })),
-  },
+    address: t.String({ default: "Cairo, Egypt" }),
+    phone: t.String({ default: "+201001112223" }),
+    email: t.String({ default: "admin@downtowngym.com" }),
+    currency: t.String({ default: "EGP" }),
+  }),
   {
     examples: [
       {
@@ -48,15 +48,18 @@ const createGymBody = t.Object(
 );
 
 export const gymRoutes = new Elysia({ prefix: "/api/v1/gyms", tags: ["Gyms"] })
-  // TODO(security): Re-enable `requireSuperAdmin` after API testing is complete.
-  // .use(requireSuperAdmin)
+  // TODO(security): restore gym ownership/super-admin authorization checks after testing.
   .get("/", async () => {
     return db.query.gyms.findMany({
       with: { branches: true },
       orderBy: [desc(gyms.createdAt)],
     });
   }, {
-    detail: { summary: "List all gyms (Super Admin)" },
+    detail: {
+      summary: "List gyms",
+      description:
+        "Testing mode: currently returns all gyms without auth guard. Intended production access: gym owner (gym_admin) for own gym; super admin only via explicit support workflow.",
+    },
   })
   .post("/", async ({ body }) => {
     const [gym] = await db.insert(gyms).values(body).returning();
@@ -67,7 +70,8 @@ export const gymRoutes = new Elysia({ prefix: "/api/v1/gyms", tags: ["Gyms"] })
     body: createGymBody,
     detail: {
       summary: "Create a new gym",
-      description: "Name cannot be empty.",
+      description:
+        "Testing mode. Name cannot be empty. Intended production access should be restricted and audited.",
     },
   })
   .get("/:gymId", async ({ params }) => {
@@ -77,7 +81,11 @@ export const gymRoutes = new Elysia({ prefix: "/api/v1/gyms", tags: ["Gyms"] })
     });
   }, {
     // params: uuidParams,
-    detail: { summary: "Get gym by ID" },
+    detail: {
+      summary: "Get gym by ID",
+      description:
+        "Testing mode route. Intended production access: gym owner for assigned gym; support access should be explicit and auditable.",
+    },
   })
   .put("/:gymId", async ({ params, body }) => {
     return db.update(gyms).set(body).where(eq(gyms.id, params.gymId)).returning();
@@ -91,13 +99,19 @@ export const gymRoutes = new Elysia({ prefix: "/api/v1/gyms", tags: ["Gyms"] })
       logoUrl: t.Optional(t.String({ default: "https://example.com/logo.png" })),
       isActive: t.Optional(t.Boolean()),
     }),
-    detail: { summary: "Update gym" },
+    detail: {
+      summary: "Update gym",
+      description: "Testing mode route. Intended production access: gym owner for assigned gym.",
+    },
   })
   .delete("/:gymId", async ({ params }) => {
     return db.delete(gyms).where(eq(gyms.id, params.gymId)).returning();
   }, {
     // params: uuidParams,
-    detail: { summary: "Delete gym" },
+    detail: {
+      summary: "Delete gym",
+      description: "Testing mode route. Intended production access should be restricted and audited.",
+    },
   });
 
 export const branchRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/branches", tags: ["Branches"] })
@@ -114,11 +128,11 @@ export const branchRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/branches",
     return db.insert(branches).values({ ...body, gymId: params.gymId }).returning();
   }, {
     // params: uuidParams,
-    body: t.Object({
+    body: t.Partial(t.Object({
       name: t.String({ minLength: 1, default: "Main Branch" }),
-      address: t.Optional(t.String({ default: "Nasr City, Cairo" })),
-      phone: t.Optional(t.String({ default: "+201001112224" })),
-    }),
+      address: t.String({ default: "Nasr City, Cairo" }),
+      phone: t.String({ default: "+201001112224" }),
+    })),
     detail: {
       summary: "Create branch",
       description: "Use a real gymId UUID. Branch name cannot be empty.",
@@ -184,7 +198,10 @@ export const dashboardRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/dashboa
     };
   }, {
     // params: uuidParams,
-    detail: { summary: "Get gym dashboard stats" },
+    detail: {
+      summary: "Get gym dashboard stats",
+      description: "Super admin can access any gym dashboard. Gym admin can access only their assigned gym.",
+    },
   });
 
 import { members, subscriptions, attendance, payments } from "../db/schema";

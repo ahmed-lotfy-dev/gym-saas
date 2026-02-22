@@ -27,13 +27,18 @@ const app = new Elysia()
         info: {
           title: "Gym SaaS API",
           version: "1.0.0",
-          description: "Multi-gym SaaS platform API for managing gyms, members, subscriptions, attendance, and trainers.",
+          description:
+            "Multi-tenant Gym SaaS API. Gym owners (gym_admin) are the primary data owners. Super admin is retained for platform operations and support workflows.",
         },
         servers: [
           { url: "http://localhost:3001", description: "Development server" },
         ],
         tags: [
-          { name: "Gyms", description: "Gym management endpoints" },
+          {
+            name: "Gyms",
+            description:
+              "Gym owner (gym_admin) routes for tenant management. During testing, some guards may be temporarily relaxed. Super admin is for platform operations/support, not default tenant data access.",
+          },
           { name: "Branches", description: "Branch management endpoints" },
           { name: "Members", description: "Member management endpoints" },
           { name: "Subscriptions", description: "Subscription management endpoints" },
@@ -44,7 +49,11 @@ const app = new Elysia()
           { name: "Trainer Clients", description: "Trainer-client relationship endpoints" },
           { name: "Reports", description: "Analytics and reporting endpoints" },
           { name: "Settings", description: "Gym settings and configuration endpoints" },
-          { name: "Dashboard", description: "Dashboard statistics endpoints" },
+          {
+            name: "Dashboard",
+            description:
+              "Dashboard stats per gym. Intended access is gym owner for assigned gym. Support access should be explicit and audited.",
+          },
         ],
       },
     })
@@ -64,6 +73,10 @@ const app = new Elysia()
   .use(csrfProtection)
   .mount("/api/auth", auth.handler)
   .get("/health", () => ({ status: "ok", timestamp: new Date().toISOString() }))
+  .get("/api/v1/docs", () => ({
+    docsPath: "/docs",
+    message: "OpenAPI UI is available at /docs",
+  }))
   .get("/", () => "Gym SaaS API - Visit /docs for documentation")
   .use(gymRoutes)
   .use(branchRoutes)
