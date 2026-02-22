@@ -23,30 +23,36 @@ declare module "elysia" {
 
 export const authMiddleware = new Elysia({ name: "auth-middleware" })
   .derive(async ({ request }): Promise<{ user?: AuthUser }> => {
-    const session = await auth.api.getSession({ headers: request.headers });
+    try {
+      const session = await auth.api.getSession({ headers: request.headers });
 
-    if (!session?.user) {
+      if (!session?.user) {
+        return {};
+      }
+
+      const userRecord = await db.query.users.findFirst({
+        where: eq(users.email, session.user.email),
+      });
+
+      if (!userRecord) {
+        return {};
+      }
+
+      return {
+        user: {
+          id: userRecord.id,
+          email: userRecord.email,
+          fullName: userRecord.fullName,
+          role: userRecord.role as UserRole,
+          gymId: userRecord.gymId,
+          branchId: userRecord.branchId,
+        },
+      };
+    } catch (error) {
+      // Keep auth failures from bubbling as 500 on protected routes.
+      console.error("Auth middleware error:", error);
       return {};
     }
-
-    const userRecord = await db.query.users.findFirst({
-      where: eq(users.email, session.user.email),
-    });
-
-    if (!userRecord) {
-      return {};
-    }
-
-    return {
-      user: {
-        id: userRecord.id,
-        email: userRecord.email,
-        fullName: userRecord.fullName,
-        role: userRecord.role as UserRole,
-        gymId: userRecord.gymId,
-        branchId: userRecord.branchId,
-      },
-    };
   });
 
 export const requireAuth = new Elysia({ name: "require-auth" })

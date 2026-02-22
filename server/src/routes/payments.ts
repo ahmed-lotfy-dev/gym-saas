@@ -4,6 +4,15 @@ import { payments, members, subscriptions } from "../db/schema";
 import { eq, and, gte, desc, count, sql } from "drizzle-orm";
 import { requireGymAdmin } from "../middleware/auth";
 
+const gymIdParams = t.Object({
+  gymId: t.String({ format: "uuid" }),
+});
+
+const gymAndPaymentIdParams = t.Object({
+  gymId: t.String({ format: "uuid" }),
+  paymentId: t.String({ format: "uuid" }),
+});
+
 export const paymentRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/payments", tags: ["Payments"] })
   .use(requireGymAdmin)
   .get("/", async ({ params, query }) => {
@@ -27,10 +36,11 @@ export const paymentRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/payments"
 
     return { items, total: total.count, page: parseInt(page), limit: parseInt(limit) };
   }, {
+    params: gymIdParams,
     query: t.Object({
       page: t.Optional(t.String()),
       limit: t.Optional(t.String()),
-      memberId: t.Optional(t.String()),
+      memberId: t.Optional(t.String({ format: "uuid" })),
     }),
     detail: { summary: "List payments" },
   })
@@ -47,9 +57,10 @@ export const paymentRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/payments"
       recordedBy: user?.id,
     }).returning();
   }, {
+    params: gymIdParams,
     body: t.Object({
-      memberId: t.String(),
-      subscriptionId: t.Optional(t.String()),
+      memberId: t.String({ format: "uuid" }),
+      subscriptionId: t.Optional(t.String({ format: "uuid" })),
       amount: t.String(),
       vatAmount: t.Optional(t.String()),
       paymentMethod: t.Union([
@@ -83,6 +94,7 @@ export const paymentRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/payments"
 
     return result;
   }, {
+    params: gymIdParams,
     query: t.Object({ from: t.Optional(t.String()), to: t.Optional(t.String()) }),
     detail: { summary: "Payment summary" },
   })
@@ -102,6 +114,7 @@ export const paymentRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/payments"
       orderBy: [desc(payments.createdAt)],
     });
   }, {
+    params: gymIdParams,
     query: t.Object({ date: t.Optional(t.String()) }),
     detail: { summary: "Daily payments" },
   })
@@ -111,5 +124,6 @@ export const paymentRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/payments"
       with: { member: true, subscription: true },
     });
   }, {
+    params: gymAndPaymentIdParams,
     detail: { summary: "Get payment" },
   });

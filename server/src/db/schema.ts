@@ -11,6 +11,7 @@ import {
   pgEnum,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 
 export const roleEnum = pgEnum("role", [
   "super_admin",
@@ -485,6 +486,134 @@ export const referrals = pgTable("referrals", {
   status: text("status").default("pending"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const gymsRelations = relations(gyms, ({ many, one }) => ({
+  branches: many(branches),
+  settings: one(gymSettings, {
+    fields: [gyms.id],
+    references: [gymSettings.gymId],
+  }),
+  taxConfig: one(taxConfig, {
+    fields: [gyms.id],
+    references: [taxConfig.gymId],
+  }),
+}));
+
+export const branchesRelations = relations(branches, ({ one, many }) => ({
+  gym: one(gyms, {
+    fields: [branches.gymId],
+    references: [gyms.id],
+  }),
+  members: many(members),
+  attendance: many(attendance),
+}));
+
+export const membersRelations = relations(members, ({ one, many }) => ({
+  gym: one(gyms, {
+    fields: [members.gymId],
+    references: [gyms.id],
+  }),
+  branch: one(branches, {
+    fields: [members.branchId],
+    references: [branches.id],
+  }),
+  subscriptions: many(subscriptions),
+}));
+
+export const subscriptionsRelations = relations(subscriptions, ({ one }) => ({
+  member: one(members, {
+    fields: [subscriptions.memberId],
+    references: [members.id],
+  }),
+  plan: one(subscriptionPlans, {
+    fields: [subscriptions.planId],
+    references: [subscriptionPlans.id],
+  }),
+}));
+
+export const subscriptionPlansRelations = relations(subscriptionPlans, ({ one, many }) => ({
+  gym: one(gyms, {
+    fields: [subscriptionPlans.gymId],
+    references: [gyms.id],
+  }),
+  subscriptions: many(subscriptions),
+}));
+
+export const attendanceRelations = relations(attendance, ({ one }) => ({
+  member: one(members, {
+    fields: [attendance.memberId],
+    references: [members.id],
+  }),
+  branch: one(branches, {
+    fields: [attendance.branchId],
+    references: [branches.id],
+  }),
+}));
+
+export const paymentsRelations = relations(payments, ({ one }) => ({
+  member: one(members, {
+    fields: [payments.memberId],
+    references: [members.id],
+  }),
+  subscription: one(subscriptions, {
+    fields: [payments.subscriptionId],
+    references: [subscriptions.id],
+  }),
+}));
+
+export const usersRelations = relations(users, ({ one }) => ({
+  branch: one(branches, {
+    fields: [users.branchId],
+    references: [branches.id],
+  }),
+}));
+
+export const trainersRelations = relations(trainers, ({ one, many }) => ({
+  user: one(users, {
+    fields: [trainers.userId],
+    references: [users.id],
+  }),
+  trainerClients: many(trainerClients),
+}));
+
+export const trainerClientsRelations = relations(trainerClients, ({ one }) => ({
+  member: one(members, {
+    fields: [trainerClients.memberId],
+    references: [members.id],
+  }),
+  trainer: one(trainers, {
+    fields: [trainerClients.trainerId],
+    references: [trainers.id],
+  }),
+}));
+
+export const trainerSessionsRelations = relations(trainerSessions, ({ one }) => ({
+  trainerClient: one(trainerClients, {
+    fields: [trainerSessions.trainerClientId],
+    references: [trainerClients.id],
+  }),
+}));
+
+export const trainerNotesRelations = relations(trainerNotes, ({ one }) => ({
+  trainerClient: one(trainerClients, {
+    fields: [trainerNotes.trainerClientId],
+    references: [trainerClients.id],
+  }),
+}));
+
+export const gymSettingsRelations = relations(gymSettings, ({ one }) => ({
+  gym: one(gyms, {
+    fields: [gymSettings.gymId],
+    references: [gyms.id],
+  }),
+}));
+
+export const taxConfigRelations = relations(taxConfig, ({ one }) => ({
+  gym: one(gyms, {
+    fields: [taxConfig.gymId],
+    references: [gyms.id],
+  }),
+}));
 
 export type Gym = typeof gyms.$inferSelect;
 export type NewGym = typeof gyms.$inferInsert;

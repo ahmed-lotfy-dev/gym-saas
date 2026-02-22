@@ -4,6 +4,30 @@ import { members, subscriptions, subscriptionPlans } from "../db/schema";
 import { eq, and, or, ilike, desc, count, sql, gte, lte } from "drizzle-orm";
 import { requireGymAccess, requireStaff } from "../middleware/auth";
 
+const gymIdParams = t.Object({
+  gymId: t.String({ format: "uuid" }),
+});
+
+const gymAndMemberIdParams = t.Object({
+  gymId: t.String({ format: "uuid" }),
+  memberId: t.String({ format: "uuid" }),
+});
+
+const gymAndBarcodeParams = t.Object({
+  gymId: t.String({ format: "uuid" }),
+  barcode: t.String(),
+});
+
+const gymAndPlanIdParams = t.Object({
+  gymId: t.String({ format: "uuid" }),
+  planId: t.String({ format: "uuid" }),
+});
+
+const gymAndSubscriptionIdParams = t.Object({
+  gymId: t.String({ format: "uuid" }),
+  subscriptionId: t.String({ format: "uuid" }),
+});
+
 export const memberRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/members", tags: ["Members"] })
   .use(requireStaff)
   .get("/", async ({ params, query }) => {
@@ -35,6 +59,7 @@ export const memberRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/members", 
 
     return { items, total: total.count, page: parseInt(page), limit: parseInt(limit) };
   }, {
+    params: gymIdParams,
     query: t.Object({
       page: t.Optional(t.String()),
       limit: t.Optional(t.String()),
@@ -48,6 +73,7 @@ export const memberRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/members", 
     const [member] = await db.insert(members).values({ ...body, gymId: params.gymId, barcode }).returning();
     return member;
   }, {
+    params: gymIdParams,
     body: t.Object({
       fullName: t.String(),
       phone: t.String(),
@@ -65,11 +91,13 @@ export const memberRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/members", 
       with: { subscriptions: { with: { plan: true } } },
     });
   }, {
+    params: gymAndMemberIdParams,
     detail: { summary: "Get member" },
   })
   .put("/:memberId", async ({ params, body }) => {
     return db.update(members).set(body).where(eq(members.id, params.memberId)).returning();
   }, {
+    params: gymAndMemberIdParams,
     body: t.Object({
       fullName: t.Optional(t.String()),
       phone: t.Optional(t.String()),
@@ -82,6 +110,7 @@ export const memberRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/members", 
   .delete("/:memberId", async ({ params }) => {
     return db.delete(members).where(eq(members.id, params.memberId)).returning();
   }, {
+    params: gymAndMemberIdParams,
     detail: { summary: "Delete member" },
   })
   .get("/by-barcode/:barcode", async ({ params }) => {
@@ -107,6 +136,7 @@ export const memberRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/members", 
       canEnter: daysRemaining > 0,
     };
   }, {
+    params: gymAndBarcodeParams,
     detail: { summary: "Get member by barcode" },
   });
 
@@ -117,11 +147,13 @@ export const subscriptionPlanRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/
       where: eq(subscriptionPlans.gymId, params.gymId),
     });
   }, {
+    params: gymIdParams,
     detail: { summary: "List subscription plans" },
   })
   .post("/", async ({ params, body }) => {
     return db.insert(subscriptionPlans).values({ ...body, gymId: params.gymId }).returning();
   }, {
+    params: gymIdParams,
     body: t.Object({
       name: t.String(),
       durationDays: t.Number(),
@@ -133,6 +165,7 @@ export const subscriptionPlanRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/
   .put("/:planId", async ({ params, body }) => {
     return db.update(subscriptionPlans).set(body).where(eq(subscriptionPlans.id, params.planId)).returning();
   }, {
+    params: gymAndPlanIdParams,
     body: t.Object({
       name: t.Optional(t.String()),
       durationDays: t.Optional(t.Number()),
@@ -144,6 +177,7 @@ export const subscriptionPlanRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/
   .delete("/:planId", async ({ params }) => {
     return db.delete(subscriptionPlans).where(eq(subscriptionPlans.id, params.planId)).returning();
   }, {
+    params: gymAndPlanIdParams,
     detail: { summary: "Delete subscription plan" },
   });
 
@@ -163,6 +197,7 @@ export const subscriptionRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/subs
       orderBy: [desc(subscriptions.createdAt)],
     });
   }, {
+    params: gymIdParams,
     query: t.Object({ status: t.Optional(t.String()) }),
     detail: { summary: "List subscriptions" },
   })
@@ -187,9 +222,10 @@ export const subscriptionRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/subs
       status: "active",
     }).returning();
   }, {
+    params: gymIdParams,
     body: t.Object({
-      memberId: t.String(),
-      planId: t.String(),
+      memberId: t.String({ format: "uuid" }),
+      planId: t.String({ format: "uuid" }),
       startDate: t.String(),
       pricePaid: t.Optional(t.String()),
     }),
@@ -209,6 +245,7 @@ export const subscriptionRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/subs
       .where(eq(subscriptions.id, params.subscriptionId))
       .returning();
   }, {
+    params: gymAndSubscriptionIdParams,
     body: t.Object({ extendDays: t.Number() }),
     detail: { summary: "Renew subscription" },
   })
@@ -226,6 +263,7 @@ export const subscriptionRoutes = new Elysia({ prefix: "/api/v1/gyms/:gymId/subs
       with: { member: true, plan: true },
     });
   }, {
+    params: gymIdParams,
     query: t.Object({ days: t.Optional(t.String()) }),
     detail: { summary: "Get expiring subscriptions" },
   });
