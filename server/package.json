@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.50",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target bun",
+    "start": "bun dist/index.js",
+    "db:generate": "dotenv -- drizzle-kit generate",
+    "db:migrate": "dotenv -- drizzle-kit migrate",
+    "db:push": "dotenv -- drizzle-kit push",
+    "db:studio": "dotenv -- drizzle-kit studio"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.4.1",
+    "@elysiajs/openapi": "^1.4.14",
+    "better-auth": "^1.4.18",
+    "drizzle-orm": "^0.45.1",
+    "elysia": "latest",
+    "logixlysia": "^6.2.0",
+    "pg": "^8.18.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "dotenv": "^17.3.1",
+    "dotenv-cli": "^11.0.0",
+    "drizzle-kit": "^0.31.9"
+  },
+  "module": "src/index.js"
+}
