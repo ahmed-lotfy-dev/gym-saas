@@ -160,9 +160,7 @@ const AppContent = () => {
         </div>
 
         <div
-          className={`relative mx-auto flex max-w-[1400px] flex-col gap-6 px-4 py-6 lg:gap-8 ${
-            isRTL ? "lg:flex-row-reverse" : "lg:flex-row"
-          }`}
+          className="relative mx-auto flex max-w-[1400px] flex-col gap-6 px-4 py-6 lg:gap-8 lg:flex-row"
           >
           <Sidebar navItems={navItems} activeId={activeId} t={t}/>
           <main className="flex-1 space-y-6 pb-12">
